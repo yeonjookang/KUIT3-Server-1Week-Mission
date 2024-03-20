@@ -4,17 +4,21 @@ import ladder.exception.ErrorMessage;
 import ladder.exception.ValidationException;
 
 public class Row {
-    private Direction[] row;
+    private Node[] nodes;
 
     public Row(int numberOfPerson) throws ValidationException {
         validateNumberOfPerson(numberOfPerson);
-        row = new Direction[numberOfPerson];
+
+        nodes = new Node[numberOfPerson];
+        for (int i = 0; i < numberOfPerson; i++) {
+            nodes[i] = new Node();
+        }
     }
 
     public void drawLine(int lineStartPosition) throws ValidationException {
         validateDrawLinePosition(lineStartPosition);
-        row[lineStartPosition] = Direction.RIGHT;
-        row[lineStartPosition + 1] = Direction.LEFT;
+        nodes[lineStartPosition].setStatusRight();
+        nodes[lineStartPosition + 1].setStatusLeft();
     }
 
     public int nextPosition(int position) throws ValidationException {
@@ -31,11 +35,11 @@ public class Row {
     }
 
     private boolean isLeft(int position) {
-        return row[position] == Direction.LEFT;
+        return nodes[position].isLeft();
     }
 
     private boolean isRight(int position) {
-        return row[position] == Direction.RIGHT;
+        return nodes[position].isRight();
     }
 
     private void validateNumberOfPerson(int numberOfPerson) throws ValidationException {
@@ -45,14 +49,14 @@ public class Row {
     }
 
     private void validateDrawLinePosition(int lineStartPosition) throws ValidationException {
-        if(lineStartPosition < 0 || lineStartPosition >= row.length - 1
-                || row[lineStartPosition] == Direction.LEFT || row[lineStartPosition + 1] == Direction.RIGHT) {
+        if(lineStartPosition < 0 || lineStartPosition >= nodes.length - 1
+                || nodes[lineStartPosition].isLeft() || nodes[lineStartPosition + 1].isRight()) {
             throw new ValidationException(ErrorMessage.DRAW_LINE_POSITION_IS_NOT_VALID);
         }
     }
 
     private void validatePosition(int position) throws ValidationException {
-        if(position >= row.length || position < 0 ) {
+        if(position >= nodes.length || position < 0 ) {
             throw new ValidationException(ErrorMessage.POSITION_IS_NOT_VALID);
         }
     }
