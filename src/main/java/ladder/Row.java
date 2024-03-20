@@ -1,17 +1,17 @@
 package ladder;
 
 public class Row {
-    private int[] row;
+    private Direction[] row;
 
     public Row(int numberOfPerson) {
         validateNumberOfPerson(numberOfPerson);
-        row = new int[numberOfPerson];
+        row = new Direction[numberOfPerson];
     }
 
     public void drawLine(int lineStartPosition) {
         validateDrawLinePosition(lineStartPosition);
-        row[lineStartPosition] = 1;
-        row[lineStartPosition + 1] = -1;
+        row[lineStartPosition] = Direction.RIGHT;
+        row[lineStartPosition + 1] = Direction.LEFT;
     }
 
     public int nextPosition(int position) {
@@ -29,11 +29,11 @@ public class Row {
     }
 
     private boolean isLeft(int position) {
-        return row[position] == -1;
+        return row[position] == Direction.LEFT;
     }
 
     private boolean isRight(int position) {
-        return row[position] == 1;
+        return row[position] == Direction.RIGHT;
     }
 
     private void validateNumberOfPerson(int numberOfPerson) {
@@ -43,7 +43,8 @@ public class Row {
     }
 
     private void validateDrawLinePosition(int lineStartPosition) {
-        if(lineStartPosition < 0 || lineStartPosition >= row.length - 1 || row[lineStartPosition] == -1 || row[lineStartPosition + 1] == 1) {
+        if(lineStartPosition < 0 || lineStartPosition >= row.length - 1
+                || row[lineStartPosition] == Direction.LEFT || row[lineStartPosition + 1] == Direction.RIGHT) {
             throw new IllegalArgumentException("라인 생성이 불가능한 위치 입니다.");
         }
     }
