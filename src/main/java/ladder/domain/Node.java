@@ -1,21 +1,23 @@
 package ladder.domain;
 
+import static ladder.domain.Direction.*;
+
 public class Node {
     private int status;
 
     public void setStatusRight(){
-        this.status = Direction.RIGHT.getDirection();
+        this.status = RIGHT.getDirection();
     }
 
     public void setStatusLeft(){
-        this.status = Direction.LEFT.getDirection();
+        this.status = LEFT.getDirection();
     }
 
     public boolean isLeft() {
-        return this.status == Direction.LEFT.getDirection();
+        return this.status == LEFT.getDirection();
     }
 
     public boolean isRight() {
-        return this.status == Direction.RIGHT.getDirection();
+        return this.status == RIGHT.getDirection();
     }
 }
