@@ -1,6 +1,7 @@
 package ladder;
 
 import ladder.domain.Ladder;
+import ladder.domain.NaturalNumber;
 import ladder.exception.ValidationException;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +12,8 @@ class LadderTest {
     @Test
     void 사다리_생성_확인() throws ValidationException {
         //given
-        int numberOfRows = 3;
-        int numberOfPerson = 5;
+        NaturalNumber numberOfRows = NaturalNumber.of(3);
+        NaturalNumber numberOfPerson = NaturalNumber.of(5);
 
         //when
         Ladder ladder  = new Ladder(numberOfRows, numberOfPerson);
@@ -24,8 +25,8 @@ class LadderTest {
     @Test
     void 사다리_시작위치_예외_처리() throws ValidationException {
         //given
-        int numberOfPerson = 3;
-        int numberOfRows = 1;
+        NaturalNumber numberOfRows = NaturalNumber.of(3);
+        NaturalNumber numberOfPerson = NaturalNumber.of(1);
         Ladder ladder = new Ladder(numberOfRows, numberOfPerson);
 
         //when
@@ -38,8 +39,8 @@ class LadderTest {
     @Test
     void 사다리_결과_확인() throws ValidationException {
         //given
-        int numberOfPerson = 4;
-        int numberOfRows = 4;
+        NaturalNumber numberOfRows = NaturalNumber.of(4);
+        NaturalNumber numberOfPerson = NaturalNumber.of(4);
         Ladder ladder = new Ladder(numberOfRows, numberOfPerson);
         ladder.drawLine(1,0);
         ladder.drawLine(1,2);

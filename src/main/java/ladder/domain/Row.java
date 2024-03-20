@@ -6,11 +6,9 @@ import ladder.exception.ValidationException;
 public class Row {
     private Node[] nodes;
 
-    public Row(int numberOfPerson) throws ValidationException {
-        validateNumberOfPerson(numberOfPerson);
-
-        nodes = new Node[numberOfPerson];
-        for (int i = 0; i < numberOfPerson; i++) {
+    public Row(NaturalNumber numberOfPerson) throws ValidationException {
+        nodes = new Node[numberOfPerson.getNumber()];
+        for (int i = 0; i < numberOfPerson.getNumber(); i++) {
             nodes[i] = new Node();
         }
     }
@@ -42,11 +40,7 @@ public class Row {
         return nodes[position].isRight();
     }
 
-    private void validateNumberOfPerson(int numberOfPerson) throws ValidationException {
-        if(numberOfPerson < 1) {
-            throw new ValidationException(ErrorMessage.PERSON_NUM_IS_NOT_VALID);
-        }
-    }
+
 
     private void validateDrawLinePosition(int lineStartPosition) throws ValidationException {
         if(lineStartPosition < 0 || lineStartPosition >= nodes.length - 1
