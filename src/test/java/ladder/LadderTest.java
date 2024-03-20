@@ -1,5 +1,6 @@
 package ladder;
 
+import ladder.domain.Ladder;
 import ladder.exception.ValidationException;
 import org.junit.jupiter.api.Test;
 
