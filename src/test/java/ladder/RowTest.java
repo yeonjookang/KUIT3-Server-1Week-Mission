@@ -1,5 +1,6 @@
 package ladder;
 
+import ladder.exception.ValidationException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

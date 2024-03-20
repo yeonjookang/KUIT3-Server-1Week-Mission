@@ -1,5 +1,7 @@
 package ladder;
 
+import ladder.exception.ValidationException;
+
 public class Ladder {
 
     private Row[] rows;

@@ -1,5 +1,8 @@
 package ladder;
 
+import ladder.exception.ErrorMessage;
+import ladder.exception.ValidationException;
+
 public class Row {
     private Direction[] row;
 
