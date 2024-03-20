@@ -4,7 +4,7 @@ public class Ladder {
 
     private Row[] rows;
 
-    public Ladder(int numberOfRows, int numberOfPerson) {
+    public Ladder(int numberOfRows, int numberOfPerson) throws ValidationException {
         rows = new Row[numberOfPerson];
 
         for(int i = 0; i < numberOfRows; i++) {
@@ -12,11 +12,11 @@ public class Ladder {
         }
     }
 
-    public void drawLine(int row, int col) {
+    public void drawLine(int row, int col) throws ValidationException {
         rows[row].drawLine(col);
     }
 
-    public int run(int position) {
+    public int run(int position) throws ValidationException {
 
         for(int i = 0; i < rows.length; i++) {
             position = rows[i].nextPosition(position);

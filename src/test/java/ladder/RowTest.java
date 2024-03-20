@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class RowTest {
 
     @Test
-    void 참여자_한_명_사다리_이동() {
+    void 참여자_한_명_사다리_이동() throws ValidationException {
         //given
         int numberOfPerson = 1;
         Row row = new Row(numberOfPerson);
@@ -20,7 +20,7 @@ class RowTest {
     }
 
     @Test
-    void 참여자_두_명_사다리_열간_이동() {
+    void 참여자_두_명_사다리_열간_이동() throws ValidationException {
         //given
         int numberOfPerson = 2;
         Row row = new Row(numberOfPerson);
@@ -41,7 +41,7 @@ class RowTest {
     }
 
     @Test
-    void 참여자_세_명_사다리_열간_이동() {
+    void 참여자_세_명_사다리_열간_이동() throws ValidationException {
         //given
         int numberOfPerson = 3;
         Row row = new Row(numberOfPerson);
@@ -69,11 +69,11 @@ class RowTest {
 
     @Test
     void 사다리_사람수_예외_처리() {
-        assertThrows(IllegalArgumentException.class, () -> new Row(0));
+        assertThrows(ValidationException.class, () -> new Row(0));
     }
 
     @Test
-    void 사다리_위치_최대값_초과_예외_처리() {
+    void 사다리_위치_최대값_초과_예외_처리() throws ValidationException {
         //given
         int numberOfPerson = 3;
         Row row = new Row(numberOfPerson);
@@ -82,11 +82,11 @@ class RowTest {
         int position = 3;
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> row.nextPosition(position));
+        assertThrows(ValidationException.class, () -> row.nextPosition(position));
     }
 
     @Test
-    void 사다리_위치_최소값_미만_예외_처리() {
+    void 사다리_위치_최소값_미만_예외_처리() throws ValidationException {
         //given
         int numberOfPerson = 3;
         Row row = new Row(numberOfPerson);
@@ -95,11 +95,11 @@ class RowTest {
         int position = -1;
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> row.nextPosition(position));
+        assertThrows(ValidationException.class, () -> row.nextPosition(position));
     }
 
     @Test
-    void 사다리_라인_그리기_위치_초과_예외() {
+    void 사다리_라인_그리기_위치_초과_예외() throws ValidationException {
         //given
         int numberOfPerson = 3;
         Row row = new Row(numberOfPerson);
@@ -108,11 +108,11 @@ class RowTest {
         int lineStartPosition = 2;
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> row.drawLine(lineStartPosition));
+        assertThrows(ValidationException.class, () -> row.drawLine(lineStartPosition));
     }
 
     @Test
-    void 사다리_라인_그리기_위치_미만_예외() {
+    void 사다리_라인_그리기_위치_미만_예외() throws ValidationException {
         //given
         int numberOfPerson = 3;
         Row row = new Row(numberOfPerson);
@@ -121,11 +121,11 @@ class RowTest {
         int lineStartPosition = -1;
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> row.drawLine(lineStartPosition));
+        assertThrows(ValidationException.class, () -> row.drawLine(lineStartPosition));
     }
 
     @Test
-    void 라인_그리기_좌측_라인_중복_예외() {
+    void 라인_그리기_좌측_라인_중복_예외() throws ValidationException {
         //given
         int numberOfPerson = 3;
         Row row = new Row(numberOfPerson);
@@ -135,12 +135,12 @@ class RowTest {
         int lineStartPosition = 1;
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> row.drawLine(lineStartPosition));
+        assertThrows(ValidationException.class, () -> row.drawLine(lineStartPosition));
 
     }
 
     @Test
-    void 라인_그리기_우측_라인_중복_예외() {
+    void 라인_그리기_우측_라인_중복_예외() throws ValidationException {
         //given
         int numberOfPerson = 3;
         Row row = new Row(numberOfPerson);
@@ -150,7 +150,7 @@ class RowTest {
         int lineStartPosition = 0;
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> row.drawLine(lineStartPosition));
+        assertThrows(ValidationException.class, () -> row.drawLine(lineStartPosition));
 
     }
 

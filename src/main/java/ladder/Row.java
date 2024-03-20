@@ -3,19 +3,18 @@ package ladder;
 public class Row {
     private Direction[] row;
 
-    public Row(int numberOfPerson) {
+    public Row(int numberOfPerson) throws ValidationException {
         validateNumberOfPerson(numberOfPerson);
         row = new Direction[numberOfPerson];
     }
 
-    public void drawLine(int lineStartPosition) {
+    public void drawLine(int lineStartPosition) throws ValidationException {
         validateDrawLinePosition(lineStartPosition);
         row[lineStartPosition] = Direction.RIGHT;
         row[lineStartPosition + 1] = Direction.LEFT;
     }
 
-    public int nextPosition(int position) {
-
+    public int nextPosition(int position) throws ValidationException {
         validatePosition(position);
 
         if (isLeft(position)) {
@@ -36,26 +35,23 @@ public class Row {
         return row[position] == Direction.RIGHT;
     }
 
-    private void validateNumberOfPerson(int numberOfPerson) {
+    private void validateNumberOfPerson(int numberOfPerson) throws ValidationException {
         if(numberOfPerson < 1) {
-            throw new IllegalArgumentException("게임의 참여자 수는 1명 이상이어야 합니다.");
+            throw new ValidationException(ErrorMessage.PERSON_NUM_IS_NOT_VALID);
         }
     }
 
-    private void validateDrawLinePosition(int lineStartPosition) {
+    private void validateDrawLinePosition(int lineStartPosition) throws ValidationException {
         if(lineStartPosition < 0 || lineStartPosition >= row.length - 1
                 || row[lineStartPosition] == Direction.LEFT || row[lineStartPosition + 1] == Direction.RIGHT) {
-            throw new IllegalArgumentException("라인 생성이 불가능한 위치 입니다.");
+            throw new ValidationException(ErrorMessage.DRAW_LINE_POSITION_IS_NOT_VALID);
         }
     }
 
-    private void validatePosition(int position) {
+    private void validatePosition(int position) throws ValidationException {
         if(position >= row.length || position < 0 ) {
-            throw new IllegalArgumentException("유효하지 않은 위치 입니다.");
+            throw new ValidationException(ErrorMessage.POSITION_IS_NOT_VALID);
         }
     }
-
-
-
 
 }

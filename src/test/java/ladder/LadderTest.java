@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LadderTest {
 
     @Test
-    void 사다리_생성_확인() {
+    void 사다리_생성_확인() throws ValidationException {
         //given
         int numberOfRows = 3;
         int numberOfPerson = 5;
@@ -20,7 +20,7 @@ class LadderTest {
     }
 
     @Test
-    void 사다리_시작위치_예외_처리() {
+    void 사다리_시작위치_예외_처리() throws ValidationException {
         //given
         int numberOfPerson = 3;
         int numberOfRows = 1;
@@ -30,11 +30,11 @@ class LadderTest {
         int position = 3;
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> ladder.run(3));
+        assertThrows(ValidationException.class, () -> ladder.run(3));
     }
 
     @Test
-    void 사다리_결과_확인() {
+    void 사다리_결과_확인() throws ValidationException {
         //given
         int numberOfPerson = 4;
         int numberOfRows = 4;
