@@ -1,58 +1,67 @@
 package ladder.domain;
 
+import ladder.domain.wrapper.NaturalNumber;
+import ladder.domain.wrapper.Node;
+import ladder.domain.wrapper.Position;
 import ladder.exception.ErrorMessage;
 import ladder.exception.ValidationException;
 
 public class Row {
     private Node[] nodes;
 
-    public Row(NaturalNumber numberOfPerson) throws ValidationException {
+    public Row(NaturalNumber numberOfPerson) {
         nodes = new Node[numberOfPerson.getNumber()];
         for (int i = 0; i < numberOfPerson.getNumber(); i++) {
             nodes[i] = new Node();
         }
     }
 
-    public void drawLine(int lineStartPosition) throws ValidationException {
+    public void drawLine(Position lineStartPosition) throws ValidationException {
         validateDrawLinePosition(lineStartPosition);
-        nodes[lineStartPosition].setStatusRight();
-        nodes[lineStartPosition + 1].setStatusLeft();
+        setLine(lineStartPosition);
     }
 
-    public int nextPosition(int position) throws ValidationException {
+    public void nextPosition(Position position) throws ValidationException {
         validatePosition(position);
 
         if (isLeft(position)) {
-            return position - 1;
+            position.minusOne();
+            System.out.println(position.getPosition());
         }
         if (isRight(position)) {
-            return position + 1;
+            position.plusOne();
         }
-
-        return position;
     }
 
-    private boolean isLeft(int position) {
-        return nodes[position].isLeft();
+    private boolean isLeft(Position position) {
+        return nodes[position.getPosition()].isLeft();
     }
 
-    private boolean isRight(int position) {
-        return nodes[position].isRight();
+    private boolean isRight(Position position) {
+        return nodes[position.getPosition()].isRight();
     }
 
-
-
-    private void validateDrawLinePosition(int lineStartPosition) throws ValidationException {
-        if(lineStartPosition < 0 || lineStartPosition >= nodes.length - 1
-                || nodes[lineStartPosition].isLeft() || nodes[lineStartPosition + 1].isRight()) {
+    private void validateDrawLinePosition(Position lineStartPosition) throws ValidationException {
+        if(lineStartPosition.isBigger(nodes.length - 2)
+                || isAlreadyHaveLine(lineStartPosition)) {
             throw new ValidationException(ErrorMessage.DRAW_LINE_POSITION_IS_NOT_VALID);
         }
     }
 
-    private void validatePosition(int position) throws ValidationException {
-        if(position >= nodes.length || position < 0 ) {
+    private void validatePosition(Position position) throws ValidationException {
+        if(position.isBigger(nodes.length-1)) {
             throw new ValidationException(ErrorMessage.POSITION_IS_NOT_VALID);
         }
     }
 
+    private boolean isAlreadyHaveLine(Position lineStartPosition) {
+        if(nodes[lineStartPosition.getPosition()].isLeft() || nodes[lineStartPosition.getPosition() + 1].isRight())
+            return true;
+        return false;
+    }
+
+    public void setLine(Position position){
+        nodes[position.getPosition()].setStatusRight();
+        nodes[position.getPosition() + 1].setStatusLeft();
+    }
 }

@@ -1,4 +1,4 @@
-package ladder.domain;
+package ladder.domain.wrapper;
 
 import ladder.exception.ErrorMessage;
 import ladder.exception.ValidationException;
@@ -22,7 +22,7 @@ public class NaturalNumber {
 
     private static void validateNumber(int number) throws ValidationException {
         if(number < 1) {
-            throw new ValidationException(ErrorMessage.PERSON_NUM_IS_NOT_VALID);
+            throw new ValidationException(ErrorMessage.IS_NOT_NATURAL_NUMBER);
         }
     }
 }

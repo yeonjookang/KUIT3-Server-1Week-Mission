@@ -1,6 +1,6 @@
-package ladder.domain;
+package ladder.domain.wrapper;
 
-import static ladder.domain.Direction.*;
+import static ladder.domain.enumcalss.Direction.*;
 
 public class Node {
     private int status;
