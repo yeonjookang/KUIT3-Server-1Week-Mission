@@ -1,23 +1,25 @@
 package ladder.domain.wrapper;
 
+import ladder.domain.enumcalss.Direction;
+
 import static ladder.domain.enumcalss.Direction.*;
 
 public class Node {
-    private int status;
+    private Direction status;
 
     public void setStatusRight(){
-        this.status = RIGHT.getDirection();
+        this.status = RIGHT;
     }
 
     public void setStatusLeft(){
-        this.status = LEFT.getDirection();
+        this.status = LEFT;
     }
 
     public boolean isLeft() {
-        return this.status == LEFT.getDirection();
+        return this.status == LEFT;
     }
 
     public boolean isRight() {
-        return this.status == RIGHT.getDirection();
+        return this.status == RIGHT;
     }
 }

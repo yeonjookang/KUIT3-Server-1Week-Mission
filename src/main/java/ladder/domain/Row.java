@@ -24,21 +24,13 @@ public class Row {
     public void nextPosition(Position position) throws ValidationException {
         validatePosition(position);
 
-        if (isLeft(position)) {
+        if (nodes[position.getPosition()].isLeft()) {
             position.minusOne();
             System.out.println(position.getPosition());
         }
-        if (isRight(position)) {
+        if (nodes[position.getPosition()].isRight()) {
             position.plusOne();
         }
-    }
-
-    private boolean isLeft(Position position) {
-        return nodes[position.getPosition()].isLeft();
-    }
-
-    private boolean isRight(Position position) {
-        return nodes[position.getPosition()].isRight();
     }
 
     private void validateDrawLinePosition(Position lineStartPosition) throws ValidationException {

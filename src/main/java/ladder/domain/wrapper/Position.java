@@ -11,9 +11,7 @@ public class Position {
         this.position = position;
     }
 
-    public int getPosition() {
-        return position;
-    }
+    public int getPosition() { return position; }
 
     public static Position of(int position) throws ValidationException {
         return new Position(position);
@@ -25,19 +23,11 @@ public class Position {
         }
     }
 
-    public boolean isBigger(int number){
-        return this.position>number;
-    }
+    public boolean isBigger(int number){ return this.position>number; }
 
-    public boolean isSmaller(int number){
-        return this.position<number;
-    }
+    public boolean isSmaller(int number){ return this.position<number; }
 
-    public void minusOne() {
-        this.position -= 1;
-    }
+    public void minusOne() { this.position -= 1; }
 
-    public void plusOne() {
-        this.position += 1;
-    }
+    public void plusOne() { this.position += 1; }
 }
