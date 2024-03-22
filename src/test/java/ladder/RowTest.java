@@ -1,7 +1,8 @@
 package ladder;
 
-import ladder.domain.NaturalNumber;
+import ladder.domain.wrapper.NaturalNumber;
 import ladder.domain.Row;
+import ladder.domain.wrapper.Position;
 import ladder.exception.ValidationException;
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +17,10 @@ class RowTest {
         Row row = new Row(numberOfPerson);
 
         //when
-        int position = 0;
+        Position position = Position.of(0);
 
         //then
-        assertEquals(0,row.nextPosition(position));
+        assertEquals(0,position.getPosition());
     }
 
     @Test
@@ -27,20 +28,20 @@ class RowTest {
         //given
         NaturalNumber numberOfPerson = NaturalNumber.of(2);
         Row row = new Row(numberOfPerson);
-        row.drawLine(0);
+        row.drawLine(Position.of(0));
 
         //when
-        int position = 0;
-        int resultPosition = row.nextPosition(position);
+        Position position = Position.of(0);;
+        row.nextPosition(position);
         //then
-        assertEquals(1,resultPosition);
+        assertEquals(1,position.getPosition());
 
 
         //when
-        position = 1;
-        resultPosition = row.nextPosition(position);
+        position = Position.of(1);;
+        row.nextPosition(position);
         //then
-        assertEquals(0, resultPosition);
+        assertEquals(0, position.getPosition());
     }
 
     @Test
@@ -48,26 +49,25 @@ class RowTest {
         //given
         NaturalNumber numberOfPerson = NaturalNumber.of(3);
         Row row = new Row(numberOfPerson);
-        row.drawLine(0);
+        row.drawLine(Position.of(0));
 
         //when
-        int position = 0;
-        int resultPosition = row.nextPosition(position);
+        Position position = Position.of(0);;
+        row.nextPosition(position);
         //then
-        assertEquals(1,resultPosition);
-
-
-        //when
-        position = 1;
-        resultPosition = row.nextPosition(position);
-        //then
-        assertEquals(0, resultPosition);
+        assertEquals(1,position);
 
         //when
-        position = 2;
-        resultPosition = row.nextPosition(position);
+        position = Position.of(1);;
+        row.nextPosition(position);
         //then
-        assertEquals(2, resultPosition);
+        assertEquals(0, position);
+
+        //when
+        position = Position.of(2);;
+        row.nextPosition(position);
+        //then
+        assertEquals(2, position);
     }
 
     @Test
@@ -82,7 +82,7 @@ class RowTest {
         Row row = new Row(numberOfPerson);
 
         //when
-        int position = 3;
+        Position position = Position.of(3);;
 
         //then
         assertThrows(ValidationException.class, () -> row.nextPosition(position));
@@ -94,11 +94,8 @@ class RowTest {
         NaturalNumber numberOfPerson = NaturalNumber.of(3);
         Row row = new Row(numberOfPerson);
 
-        //when
-        int position = -1;
-
         //then
-        assertThrows(ValidationException.class, () -> row.nextPosition(position));
+        assertThrows(ValidationException.class, () -> Position.of(-1));
     }
 
     @Test
@@ -108,7 +105,7 @@ class RowTest {
         Row row = new Row(numberOfPerson);
 
         //when
-        int lineStartPosition = 2;
+        Position lineStartPosition = Position.of(2);
 
         //then
         assertThrows(ValidationException.class, () -> row.drawLine(lineStartPosition));
@@ -120,11 +117,8 @@ class RowTest {
         NaturalNumber numberOfPerson = NaturalNumber.of(3);
         Row row = new Row(numberOfPerson);
 
-        //when
-        int lineStartPosition = -1;
-
         //then
-        assertThrows(ValidationException.class, () -> row.drawLine(lineStartPosition));
+        assertThrows(ValidationException.class, () -> Position.of(-1));
     }
 
     @Test
@@ -132,10 +126,10 @@ class RowTest {
         //given
         NaturalNumber numberOfPerson = NaturalNumber.of(3);
         Row row = new Row(numberOfPerson);
-        row.drawLine(0);
+        row.drawLine(Position.of(0));
 
         //when
-        int lineStartPosition = 1;
+        Position lineStartPosition = Position.of(1);
 
         //then
         assertThrows(ValidationException.class, () -> row.drawLine(lineStartPosition));
@@ -147,10 +141,10 @@ class RowTest {
         //given
         NaturalNumber numberOfPerson = NaturalNumber.of(3);
         Row row = new Row(numberOfPerson);
-        row.drawLine(1);
+        row.drawLine(Position.of(1));
 
         //when
-        int lineStartPosition = 0;
+        Position lineStartPosition = Position.of(0);
 
         //then
         assertThrows(ValidationException.class, () -> row.drawLine(lineStartPosition));
